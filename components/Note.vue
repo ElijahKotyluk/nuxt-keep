@@ -73,9 +73,15 @@ export default {
   methods: {
     deleteNote(id) {
       console.log(this.id)
-      fireDb.collection('notes').remove(id).then((res) => {
-        console.log(res)
-      })
+
+      fireDb.collection('notes')
+        .doc(this.id)
+        .delete()
+        .then((res) => {
+          console.log('res:', res)
+        }).catch((error) => {
+          console.log('error:', error)
+        })
     }
   }
 }
