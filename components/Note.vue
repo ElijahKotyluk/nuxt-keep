@@ -8,48 +8,59 @@
     class="ma-2"
   >
     <v-card
-      class="text-xs-center"
       elevation="12"
       min-width="215"
       max-width="400"
     >
-      <v-layout column>
-        <v-card-title :title="title">
-          <span class="title" font-weight-light>
-            {{ title }}
-          </span>
-          <v-spacer />
-          <v-icon>
-            notes
-          </v-icon>
-        </v-card-title>
+      <v-card-title :title="title">
+        <span class="title" font-weight-light>
+          {{ title }}
+        </span>
+        <v-spacer />
+        <v-icon>
+          notes
+        </v-icon>
+      </v-card-title>
 
-        <v-divider />
+      <v-divider />
 
-        <v-card-text>
-          {{ content }}
-        </v-card-text>
+      <v-card-text>
+        {{ content }}
+      </v-card-text>
 
-        <v-divider />
+      <v-divider />
 
-        <v-card-actions>
+      <v-card-actions>
+        <v-btn icon flat>
           <v-icon>
             edit
           </v-icon>
-          <v-spacer />
+        </v-btn>
+        <v-spacer />
+        <v-btn
+          flat
+          icon
+          @click="deleteNote(id)"
+        >
           <v-icon>
             delete
           </v-icon>
-        </v-card-actions>
-      </v-layout>
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </v-flex>
 </template>
 
 <script>
+import { fireDb } from '~/plugins/firebase.js'
+
 export default {
   name: 'Note',
   props: {
+    id: {
+      type: String,
+      default: ''
+    },
     title: {
       type: String,
       default: ''
@@ -59,6 +70,19 @@ export default {
       default: ''
     }
   },
-  methods: {}
+  methods: {
+    deleteNote(id) {
+      console.log(this.id)
+      fireDb.collection('notes').remove(id).then((res) => {
+        console.log(res)
+      })
+    }
+  }
 }
 </script>
+
+<style>
+.v-card__text {
+  min-height: 125px;
+}
+</style>

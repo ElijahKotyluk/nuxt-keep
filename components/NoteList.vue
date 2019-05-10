@@ -3,6 +3,7 @@
     <v-layout align-space-around justify-center row wrap fill-height>
       <note
         v-for="note in notes"
+        :id="note.id"
         :key="note.id"
         :title="note.title"
         :content="note.content"
