@@ -4,38 +4,22 @@
     justify-center
     align-center
   >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
-      <div class="text-xs-center">
-        some text
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            flat
-            nuxt
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
+    <div class="text-xs-center">
+      <create-note />
+    </div>
+
+    <note-list />
   </v-layout>
 </template>
 
 <script>
+import CreateNote from '~/components/CreateNote.vue'
+import NoteList from '~/components/NoteList.vue'
+
 export default {
-  components: {}
+  components: {
+    CreateNote,
+    NoteList
+  }
 }
 </script>
