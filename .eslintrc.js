@@ -11,7 +11,8 @@ module.exports = {
     '@nuxtjs',
     'plugin:nuxt/recommended'
   ],
-  // add your custom rules here
+  //TODO remove no-console before final commit.
   rules: {
+    'no-console': 'off'
   }
 }
