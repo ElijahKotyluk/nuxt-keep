@@ -8,18 +8,18 @@
       <create-note />
     </div>
 
-    <note-list />
+    <notes />
   </v-layout>
 </template>
 
 <script>
 import CreateNote from '~/components/CreateNote.vue'
-import NoteList from '~/components/NoteList.vue'
+import Notes from '~/components/Notes.vue'
 
 export default {
   components: {
     CreateNote,
-    NoteList
+    Notes
   }
 }
 </script>

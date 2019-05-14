@@ -31,7 +31,11 @@
       <v-divider />
 
       <v-card-actions>
-        <v-btn icon flat>
+        <v-btn
+          icon
+          flat
+          @click="updateModal()"
+        >
           <v-icon>
             edit
           </v-icon>
@@ -52,8 +56,6 @@
 </template>
 
 <script>
-import { fireDb } from '~/plugins/firebase.js'
-
 export default {
   name: 'Note',
   props: {
@@ -71,17 +73,12 @@ export default {
     }
   },
   methods: {
+    // Delete note in firestore && emit event to Vuex store
     deleteNote(id) {
-      console.log(this.id)
-
-      fireDb.collection('notes')
-        .doc(this.id)
-        .delete()
-        .then((res) => {
-          console.log('res:', res)
-        }).catch((error) => {
-          console.log('error:', error)
-        })
+      this.$store.dispatch('notes/deleteNote', id)
+    },
+    updateModal() {
+      console.log('Modal button clicked')
     }
   }
 }

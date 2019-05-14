@@ -5,13 +5,13 @@
     style="max-width: 250px;"
   >
     <v-toolbar>
-      <p>
-        New Note
-      </p>
+      <v-toolbar-title>
+        Create Note
+      </v-toolbar-title>
     </v-toolbar>
 
     <v-form
-      ref="form"
+      ref="createNote"
       v-model="form"
       class="pa-3"
     >
@@ -33,7 +33,7 @@
     <v-card-actions>
       <v-btn
         flat
-        @click="$refs.form.reset()"
+        @click="$refs.createNote.reset()"
       >
         Clear
       </v-btn>
@@ -52,8 +52,6 @@
 </template>
 
 <script>
-import { fireDb } from '~/plugins/firebase.js'
-
 export default {
   name: 'CreateNote',
   data() {
@@ -74,15 +72,7 @@ export default {
           title: this.title,
           content: this.content
         }
-
-        fireDb.collection('notes').add(newNote).then((res) => {
-          console.log('Firestore response:', res)
-
-          this.title = ''
-          this.content = ''
-        }).catch((error) => {
-          console.log(error)
-        })
+        this.$store.dispatch('notes/addNote', newNote)
       }
     }
   }
