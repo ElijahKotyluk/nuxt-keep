@@ -1,12 +1,10 @@
 <template>
   <v-card
-    class="mx-auto my-3"
     elevation="12"
-    width="300"
   >
     <v-toolbar>
       <v-toolbar-title>
-        Create Note
+        Edit Note
       </v-toolbar-title>
     </v-toolbar>
 
@@ -43,7 +41,7 @@
         class="white--text"
         color="deep-purple accent-4"
         depressed
-        @click="createNote()"
+        @click="updateNote()"
       >
         Submit
       </v-btn>
@@ -53,7 +51,13 @@
 
 <script>
 export default {
-  name: 'CreateNote',
+  name: 'UpdateNote',
+  props: {
+    id: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
       form: false,
@@ -66,18 +70,17 @@ export default {
     }
   },
   methods: {
-    createNote() {
-      if (this.title && this.content) {
-        const newNote = {
-          title: this.title,
-          content: this.content
-        }
-        this.$store.dispatch('notes/addNote', newNote)
+    updateNote(id, title, content) {
+      console.log('Dispatching update acttion')
+      console.log(`id: ${this.id} title: ${this.title} content: ${this.content}`)
+      const doda = {
+        id: this.id,
+        title: this.title,
+        content: this.content
       }
+      console.log('note:', doda)
+      this.$store.dispatch('notes/updateNote', doda)
     }
   }
 }
 </script>
-
-<style>
-</style>

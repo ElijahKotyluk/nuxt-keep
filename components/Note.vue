@@ -31,15 +31,26 @@
       <v-divider />
 
       <v-card-actions>
-        <v-btn
-          icon
-          flat
-          @click="updateModal()"
+        <v-dialog
+          v-model="dialog"
+          width="350"
         >
-          <v-icon>
-            edit
-          </v-icon>
-        </v-btn>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              flat
+              v-on="on"
+            >
+              <v-icon>
+                edit
+              </v-icon>
+            </v-btn>
+          </template>
+
+          <update-note
+            :id="id"
+          />
+        </v-dialog>
         <v-spacer />
         <v-btn
           flat
@@ -56,8 +67,13 @@
 </template>
 
 <script>
+import UpdateNote from './UpdateNote.vue'
+
 export default {
   name: 'Note',
+  components: {
+    UpdateNote
+  },
   props: {
     id: {
       type: String,
@@ -72,13 +88,15 @@ export default {
       default: ''
     }
   },
+  data() {
+    return {
+      dialog: false
+    }
+  },
   methods: {
-    // Delete note in firestore && emit event to Vuex store
+    // Dispatch delete note action with the id:
     deleteNote(id) {
       this.$store.dispatch('notes/deleteNote', id)
-    },
-    updateModal() {
-      console.log('Modal button clicked')
     }
   }
 }
