@@ -73,13 +73,13 @@ export default {
     updateNote(id, title, content) {
       console.log('Dispatching update acttion')
       console.log(`id: ${this.id} title: ${this.title} content: ${this.content}`)
-      const doda = {
+      const note = {
         id: this.id,
         title: this.title,
         content: this.content
       }
-      console.log('note:', doda)
-      this.$store.dispatch('notes/updateNote', doda)
+      console.log('note:', note)
+      this.$store.dispatch('notes/updateNote', note)
     }
   }
 }
